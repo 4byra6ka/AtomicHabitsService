@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
 import os
 from dotenv import load_dotenv
 from datetime import timedelta
@@ -41,6 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'habits.apps.HabitsConfig',
+    'users.apps.UsersConfig',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'django_filters',
+    'drf_yasg',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -130,6 +136,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'users.User'
+
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
@@ -149,3 +157,11 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_TIMEZONE = os.getenv('TIME_ZONE')
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_BEAT_SCHEDULE = {
+    'TelegramBotUpdates': {
+        'task': 'users.tasks.telegram_bot_updates',
+        'schedule': timedelta(minutes=1),
+    },
+}
+
+TG_API_KEY = os.getenv('TG_API_KEY')
