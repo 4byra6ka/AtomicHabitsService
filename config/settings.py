@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'habits.apps.HabitsConfig',
     'users.apps.UsersConfig',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -165,3 +167,15 @@ CELERY_BEAT_SCHEDULE = {
 }
 
 TG_API_KEY = os.getenv('TG_API_KEY')
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
+    'http://10.2.3.16:8000',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'http://10.2.3.16:8000',
+]
+
+CORS_ALLOW_ALL_ORIGINS = False
