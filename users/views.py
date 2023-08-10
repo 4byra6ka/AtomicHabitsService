@@ -7,29 +7,31 @@ from users.serializers import UserSerializer, UserCreateSerializer
 
 
 class UsersCreateView(generics.CreateAPIView):
-    # queryset = User.objects.all()
     serializer_class = UserCreateSerializer
 
 
 class UsersListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    # permission_classes = [IsModerator]
+    permission_classes = [IsAuthenticated & IsModerator]
 
 
 class UsersDetailView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated & IsOwner]
+    lookup_field = 'username'
 
 
 class UsersUpdateView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated & IsOwner]
+    lookup_field = 'username'
 
 
 class UsersDeleteView(generics.DestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated & IsOwner]
+    lookup_field = 'username'

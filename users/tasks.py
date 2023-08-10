@@ -9,6 +9,7 @@ from users.services import tg_get_updates, tg_send_message
 
 @shared_task
 def telegram_bot_updates():
+    """Периодическая задача(каждую минуту) опрос телеграм бота на получения команды '/start' и активация пользователя"""
     tg_data = tg_get_updates()
     users = User.objects.filter(is_active=False)
     if tg_data['ok'] and tg_data['result'] != []:
@@ -26,34 +27,4 @@ def telegram_bot_updates():
                         tg_get_updates(message['update_id'])
                         text = f'Ваша учетная запись активирована. Пароль для входа:\n{password}'
                         tg_send_message(message['message']['from']['id'], text)
-                    # else:
-                    #     tg_send_message(
-                    #         message['message']['from']['id'],
-                    #         'Вы уже активированы или не прошли регистрацию'
-                    #         )
             tg_get_updates(message['update_id'])
-
-
-
-
-
-from django_celery_beat.models import PeriodicTask, IntervalSchedule
-
-# # Создаем интервал для повтора
-# schedule, created = IntervalSchedule.objects.get_or_create(
-#      every=60,
-#      period=IntervalSchedule.SECONDS,
-#  )
-#
-# # Создаем задачу для повторения
-# PeriodicTask.objects.create(
-#      interval=schedule,
-#      name='TelegramBotUpdates',
-#      task='users.tasks.telegram_bot_updates',
-#      args=json.dumps({}),
-#      kwargs=json.dumps({}),
-#      expires=datetime.utcnow() + timedelta(seconds=30)
-#  )
-
-
-
