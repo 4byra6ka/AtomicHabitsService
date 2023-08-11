@@ -5,6 +5,7 @@ from habits.validators import DurationValidator, FrequencyValidator, IsPleasantV
 
 
 class HabitSerializer(serializers.ModelSerializer):
+    """Сериализатор для привычек"""
     validators = [
         DurationValidator(field='duration'),
         FrequencyValidator(field='frequency'),

@@ -20,14 +20,16 @@ class Habit(models.Model):
     task = models.ForeignKey(PeriodicTask, on_delete=models.SET_NULL, verbose_name='Ссылка на периодическую задачу', **NULLABLE)
 
     def __str__(self):
-        if self.award:
-            return (f"я буду {self.action} в {self.time} в {self.place}\n"
-                    f"Время на выполнение: {self.duration}\n"
-                    f"Вознаграждение: {self.award}")
-        else:
-            return (f"я буду {self.action} в {self.time} в {self.place}\n"
-                    f"Время на выполнение: {self.duration}\n"
-                    f"Вознаграждение: {self.link_pleasant.award}")
+        loop_self = self
+        message = f"я буду {self.action} в {self.time} в {self.place}\nВремя на выполнение: {self.duration}\n"
+        while True:
+            if loop_self.award:
+                return message + f"Вознаграждение: {loop_self.award}"
+            elif loop_self.link_pleasant is None:
+                return message
+            else:
+                loop_self = loop_self.link_pleasant
+                continue
 
     class Meta:
         verbose_name = "Привычка"
