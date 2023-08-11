@@ -1,6 +1,3 @@
-import json
-from datetime import datetime, timedelta
-
 from celery import shared_task
 
 from users.models import User

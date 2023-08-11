@@ -17,7 +17,8 @@ class Habit(models.Model):
     frequency = models.PositiveIntegerField(default=1, verbose_name='Периодичность привычки в днях')
     duration = models.PositiveIntegerField(default=120, verbose_name='Время на выполнения привычки')
     is_public = models.BooleanField(default=False, verbose_name='Флаг публикации')
-    task = models.ForeignKey(PeriodicTask, on_delete=models.SET_NULL, verbose_name='Ссылка на периодическую задачу', **NULLABLE)
+    task = models.ForeignKey(PeriodicTask, on_delete=models.SET_NULL, verbose_name='Ссылка на периодическую задачу',
+                             **NULLABLE)
 
     def __str__(self):
         loop_self = self

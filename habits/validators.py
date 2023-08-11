@@ -41,6 +41,7 @@ class IsPleasantValidator:
         if link_pleasant is not None:
             link_pleasant_obj = Habit.objects.filter(pk=link_pleasant.pk, is_pleasant=True)
             if len(link_pleasant_obj) == 0:
-                raise ValidationError('В связанные привычки могут попадать только привычки с признаком приятной привычки.')
+                raise ValidationError(
+                    'В связанные привычки могут попадать только привычки с признаком приятной привычки.')
         if is_pleasant and link_pleasant is not None and award is not None:
             raise ValidationError('У приятной привычки не может быть вознаграждения или связанной привычки.')

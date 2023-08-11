@@ -3,6 +3,7 @@ from datetime import datetime, date
 
 from django_celery_beat.models import PeriodicTask, IntervalSchedule
 
+
 def create_periodic_task(frequency, pk, time):
     """Создание периодической задачи"""
     schedule, created = IntervalSchedule.objects.get_or_create(

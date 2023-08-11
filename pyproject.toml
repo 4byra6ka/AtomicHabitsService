@@ -20,6 +20,7 @@ celery = "^5.3.1"
 django-celery-beat = "^2.5.0"
 redis = "^4.6.0"
 django-cors-headers = "^4.2.0"
+flake8 = "^6.1.0"
 
 
 [build-system]
