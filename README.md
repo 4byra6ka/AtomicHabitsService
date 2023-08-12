@@ -40,7 +40,7 @@
 * Установить БД Redis `sudo apt install redis`.
 * Создать файл `.evn` для передачи личных данных в Django настройки.
 
-    
+### `.evn`
     SECRET_KEY=<SECRET_KEY_DJANGO[django-insecure-tom...]>
     ALLOWED_HOSTS=*
     LANGUAGE_CODE=ru-ru
