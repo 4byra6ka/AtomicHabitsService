@@ -10,8 +10,9 @@ class DurationValidator:
 
     def __call__(self, value):
         field_value = dict(value).get(self.field)
-        if field_value > 120:
-            raise ValidationError('Время выполнения должно быть не больше 120 секунд.')
+        if field_value is not None:
+            if field_value > 120:
+                raise ValidationError('Время выполнения должно быть не больше 120 секунд.')
 
 
 class FrequencyValidator:
@@ -21,8 +22,9 @@ class FrequencyValidator:
 
     def __call__(self, value):
         field_value = dict(value).get(self.field)
-        if field_value > 7:
-            raise ValidationError('Нельзя выполнять привычку реже, чем 1 раз в 7 дней.')
+        if field_value is not None:
+            if field_value > 7:
+                raise ValidationError('Нельзя выполнять привычку реже, чем 1 раз в 7 дней.')
 
 
 class IsPleasantValidator:

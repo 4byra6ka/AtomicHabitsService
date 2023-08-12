@@ -30,9 +30,9 @@ class HabitListView(ListAPIView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Habit.objects.all()
+            return Habit.objects.all().order_by("pk")
         else:
-            return Habit.objects.filter(owner=self.request.user)
+            return Habit.objects.filter(owner=self.request.user).order_by("pk")
 
 
 class HabitDetailView(RetrieveAPIView):
@@ -76,6 +76,6 @@ class HabitDeleteView(DestroyAPIView):
 
 class PublicHabitListView(ListAPIView):
     """Контроллер списка публичных привычек"""
-    queryset = Habit.objects.filter(is_public=True)
+    queryset = Habit.objects.filter(is_public=True).order_by('pk')
     serializer_class = HabitSerializer
     pagination_class = HabitPaginator
