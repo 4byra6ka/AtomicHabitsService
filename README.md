@@ -53,8 +53,8 @@
 
 ***
 ### Разворачивание проекта "Сервис Atomic Habits"
-    git cline https://github.com/4byra6ka/CourseWorkModule7.git
-    cd CourseWorkModule7
+    git cline https://github.com/4byra6ka/AtomicHabitsService.git
+    cd AtomicHabitsService
     poetry install
     python manage.py runserver <IP>:<PORT>
     celery -A config worker -l INFO
